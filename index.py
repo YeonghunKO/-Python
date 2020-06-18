@@ -17,7 +17,6 @@ print('''
       <title>Python website</title>
 </head>
 <body>
-
 <h1><a href="index.py?id=WEB">WEB</a></h1>
 <div id="grid">
  <ol>
