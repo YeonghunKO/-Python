@@ -20,9 +20,12 @@ form = cgi.FieldStorage()
 if 'id' in form:
     pageId = form["id"].value
     description = open('data/'+pageId, 'r').read()#description의 값을 설정해줘야함.id가 있으면 데이터폴더에 들어가서 id에 해당하는파일을 읽는 모드로 바꾼다음('r') 열어라(open). 그리고 그 열은 값을 description에 포함시켜라 는 뜻. 함수이다.
+    update_link = '<a href="update.py?id={}">update</a>'.format(pageId)#update기능을 추가했다. id값이 있는 즉,content 를 눌렀을떄는 update가 표시되게하고 아니면 else처럼 공백이 뜨도록했다. 그리고 밑에 create링크 옆에 update format을 추가함.
+
 else:
     pageId = 'Welcome'
     description = 'Hello, ET'
+    update_link = ''
 #조건문을 사용했더니 쌈빡하게 되었다. if 'id' in form 는 ''폼안에 id 있으면''이라는 뜻.
 #중요!:if 위에 변수 두줄을 빼먹지 말것!
 ##HTML로만 만든 웹사이트와 파이썬을 통해 만든 웹사이트에는 엄청난 차이가 있다. HTML 코드가 index.py에 철저히 갇혀있고, 이것만 바꾸면 모든 페이지에 적용가능하다. 그리고 data폴더안에 내용이 깔끔하게 저장되어있다
@@ -43,10 +46,10 @@ print('''
   {listStr}
  </ol>
 
-<div id="article">
-<h2>{title}</h2>
- WEB is short word for West East booger
-
+<a href="create.py">create</a>
+   {update_link}
+  <h2>{title}</h2>
+  <p>{desc}</p>
 </body>
 </html>
 
