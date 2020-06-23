@@ -6,16 +6,8 @@ print ()
 #여튼 해결하고나니 기분좋음 ㅎㅎ
 #원리는 체인 연결처럼 이어지는 거다. ol 태그 에 걸린 링크에 id를 설정->pageId=form[id]로 이어짐->title=pageId->h2태그의{title} 로 연결되는 구조.
 
-import cgi, os
+import cgi, os, view
 
-files = os.listdir('data')#데이터 폴더안에 있는 파일 목록을 불러오는 문법이다. 그걸 files 변수에 담았다.
-print(files)
-listStr = ''
-for item in files:
-    listStr = listStr + '<li><a href="index.py?id={name}">{name}</a></li>'.format(name=item)
-##감격적이지 않냐?ㅠㅠ 포문 을 통해 files 안에 있는 리스트(item)에 링크를 걸고 목록을 만든다음 그 목록들을 더하는 작업을 ''반복'' 하도록 만들었다.
-##그리고 이 listStr을 맨 마지막 format에 추가 시키고 <ol> 태그에 {listStr} 적어서 HTML코드를 한줄로 요약하였다. 이렇게 되면 이제 DATA data폴더안에
-##있는 문서만 수정하면 된다. DATA폴더에 PYTHON 폴더만 만들면 끝나는 거다. 대단하다 이고잉. 그리고 이런 작업을 문장으로 표현한 인간도 경의롭다. 그 창의력과 상상력에.
 
 form = cgi.FieldStorage()#사용자가 index.py뒤에 id값을 받을때 이 코드를 사용함.
 if 'id' in form:
@@ -55,7 +47,7 @@ print('''
 </body>
 </html>
 
-'''.format(title=pageId, desc=description, listStr=listStr, form_default_title=pageId, form_default_desc=description ))
+'''.format(title=pageId, desc=description, listStr=view.getList(), form_default_title=pageId, form_default_desc=description ))
 #query string
 
 #이게 무슨뜻이냐면, text박스에 작성한 제목과 설명을 submit 하면, title 그리고 description이라는 이름으로
